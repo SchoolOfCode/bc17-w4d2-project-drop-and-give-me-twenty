@@ -1,5 +1,6 @@
 import express from 'express';
 import helmet from 'helmet';
+import activities from './activities.json' with{type:'json'};
 const app = express();
 const port = 3000
 
@@ -17,4 +18,9 @@ app.get('/', function (req, res) {
 // open up listening on port 3000
 app.listen(3000, function () {
     console.log("I am on Port 3000");
+});
+
+app.get('/activities', function(req, res) {
+    res.send(activities);
+    console.log(res.status)
 });
