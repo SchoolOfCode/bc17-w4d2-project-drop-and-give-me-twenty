@@ -9,6 +9,8 @@ This is a Node.js module available through the npm registry.
 2. Clone the repo from github at
 https://github.com/SchoolOfCode/bc17-w4d2-project-drop-and-give-me-twenty.git
 
+3. Run npm install
+
 3. To start the server, type command "npm start" into command terminal
 
 4. In your browser adress bar, type "localhost:3000"
