@@ -11,7 +11,13 @@ export async function getActivitiesById(requestId) {
 
 // add new activity to the activities array
 export async function createNewActivity(newActivity) {
-    activities.push(newActivity);
+    const activity = {
+        id : "1232324",
+        activity_submitted : Date.now(),
+        ...newActivity
+
+    }
+    activities.push(activity);
     console.log(activities);
-    return newActivity;
+    return activity;
 };

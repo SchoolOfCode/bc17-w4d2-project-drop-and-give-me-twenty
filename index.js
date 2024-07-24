@@ -59,7 +59,8 @@ app.get('/activities/:id', async function (req, res) {
 });
 
 app.post('/activities', async function (req, res) {
-    const newActivity = await req.body;
+    const newActivity = await req.body.addActivity;
+    
     try {
         createNewActivity(newActivity);
         res.status(201).json({
