@@ -56,9 +56,19 @@ app.get('/activities/:id', async function (req, res) {
 });
 
 app.post('/activities', async function (req, res) {
-    const newActivity = await req.body;
+    const newActivity = await createNewActivity(req.body);
     try {
         createNewActivity(newActivity);
+        res.status(201).json({
+            "sucess": true,
+            "payload": newActivity
+        });
+    } 
+    catch {
+        res.status(300).json({
+            "sucess": false,
+            "payload": null
+        })
     }
 })
 
