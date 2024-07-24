@@ -1,0 +1,17 @@
+import activities from './activities.json' with{type: 'json'};
+
+
+// helper function to return activities by ID
+export async function getActivitiesById(requestId) {
+    const userActivities = activities.find(({ id }) => id === requestId);
+    if (userActivities) {
+        return userActivities;
+    }
+    throw new Error(`No activity with ${requestId} found.`);
+}
+
+// add new activity to the activities array
+export async function createNewActivity(newActivity) {
+    activities.push(newActivity);
+    return newActivity;
+};

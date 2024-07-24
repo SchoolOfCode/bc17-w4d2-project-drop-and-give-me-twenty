@@ -1,6 +1,6 @@
 import express from 'express';
 import helmet from 'helmet';
-import activities from './activities.json' with{type: 'json'};
+import { getActivitiesById, createNewActivity } from "./helpers.js";
 const app = express();
 const port = 3000
 
@@ -39,9 +39,9 @@ app.get('/activities', function (req, res) {
 
 //GEt request handler for User ID 
 
-app.get('/activities/:id', function (req, res) {
+app.get('/activities/:id', async function (req, res) {
     const id = req.params.id
-    const ActiveID = getActivitiesById(id);
+    const ActiveID = await getActivitiesById(id);
     try {
         res.status(200).json({
             "success": true,
@@ -55,20 +55,14 @@ app.get('/activities/:id', function (req, res) {
     };
 });
 
-function getActivitiesById(requestId) {
-    const userActivities = activities.find(({ id }) => id === requestId);   
-      if (userActivities) {
-        return userActivities;
-      }
-      throw new Error(`No activity with ${requestId} found.`);
+app.post('/activities', async function (req, res) {
+    const newActivity = await req.body;
+    try {
+        createNewActivity(newActivity);
     }
-
-
-
-
-
+})
 
 // open up listening on port 3000
-app.listen(3000, function () {
-    console.log("I am on Port 3000");
+app.listen(port, function () {
+    console.log(`I am on Port ${port}`);
 });
