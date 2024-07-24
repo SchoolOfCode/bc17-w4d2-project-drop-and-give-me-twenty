@@ -37,6 +37,31 @@ app.get('/activities', function (req, res) {
     };
 });
 
+//GEt request handler for User ID 
+
+app.get('/activities/:id', function (req, res) {
+    const id = req.params.id
+    const ActiveID = activities[req.params.id];
+    try {
+        res.status(200).json({
+            "success": true,
+            "payload": ActiveID
+        });
+    } catch {
+        res.status(500).json({
+            "success": false,
+            "payload": null
+        });
+    };
+});
+
+
+
+
+
+
+
+
 // open up listening on port 3000
 app.listen(3000, function () {
     console.log("I am on Port 3000");
