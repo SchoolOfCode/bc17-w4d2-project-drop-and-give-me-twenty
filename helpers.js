@@ -1,5 +1,4 @@
-import activities from './activities.js';
-
+import { activities } from './activities.js';
 
 // helper function to return activities by ID
 export async function getActivitiesById(requestId) {
@@ -13,5 +12,6 @@ export async function getActivitiesById(requestId) {
 // add new activity to the activities array
 export async function createNewActivity(newActivity) {
     activities.push(newActivity);
+    console.log(activities);
     return newActivity;
 };

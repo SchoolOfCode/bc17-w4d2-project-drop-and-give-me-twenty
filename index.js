@@ -63,13 +63,13 @@ app.post('/activities', async function (req, res) {
     try {
         createNewActivity(newActivity);
         res.status(201).json({
-            "sucess": true,
+            "success": true,
             "payload": newActivity
         });
-    } 
+    }
     catch {
         res.status(300).json({
-            "sucess": false,
+            "success": false,
             "payload": null
         })
     }
