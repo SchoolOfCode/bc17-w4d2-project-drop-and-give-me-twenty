@@ -7,6 +7,9 @@ const port = 3000
 // Using the helmet middleware package
 app.use(helmet());
 
+// Using the express middleware package
+app.use(express.json())
+
 // Root level get request handler
 app.get('/', function (req, res) {
     try {
@@ -56,7 +59,7 @@ app.get('/activities/:id', async function (req, res) {
 });
 
 app.post('/activities', async function (req, res) {
-    const newActivity = await createNewActivity(req.body);
+    const newActivity = await req.body;
     try {
         createNewActivity(newActivity);
         res.status(201).json({

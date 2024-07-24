@@ -1,4 +1,4 @@
-import activities from './activities.json' with{type: 'json'};
+import activities from './activities.js';
 
 
 // helper function to return activities by ID
