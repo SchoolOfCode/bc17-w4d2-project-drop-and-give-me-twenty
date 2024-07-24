@@ -1,3 +1,5 @@
+import crypto from 'crypto';
+
 import { activities } from './activities.js';
 
 // helper function to return activities by ID
@@ -12,7 +14,7 @@ export async function getActivitiesById(requestId) {
 // add new activity to the activities array
 export async function createNewActivity(newActivity) {
     const activity = {
-        id : "1232324",
+        id : crypto.randomUUID(),
         activity_submitted : Date.now(),
         ...newActivity
 
