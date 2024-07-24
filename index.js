@@ -41,7 +41,7 @@ app.get('/activities', function (req, res) {
 
 app.get('/activities/:id', function (req, res) {
     const id = req.params.id
-    const ActiveID = activities[req.params.id];
+    const ActiveID = getActivitiesById(id);
     try {
         res.status(200).json({
             "success": true,
@@ -55,7 +55,13 @@ app.get('/activities/:id', function (req, res) {
     };
 });
 
-
+function getActivitiesById(requestId) {
+    const userActivities = activities.find(({ id }) => id === requestId);   
+      if (userActivities) {
+        return userActivities;
+      }
+      throw new Error(`No activity with ${requestId} found.`);
+    }
 
 
 
