@@ -50,7 +50,7 @@ app.get('/activities/:id', async function (req, res) {
             "success": true,
             "payload": ActiveID
         });
-    } catch {
+    } catch (e) {
         res.status(500).json({
             "success": false,
             "payload": null
@@ -60,19 +60,19 @@ app.get('/activities/:id', async function (req, res) {
 
 app.post('/activities', async function (req, res) {
     const newActivity = await req.body.addActivity;
-    
+
     try {
-        createNewActivity(newActivity);
+        const activity = await createNewActivity(newActivity);
         res.status(201).json({
             "success": true,
-            "payload": newActivity
+            "payload": activity
         });
     }
     catch (e) {
         console.error(e)
         res.status(300).json({
             "success": false,
-            "payload": null
+            "payload": e
         })
     }
 })

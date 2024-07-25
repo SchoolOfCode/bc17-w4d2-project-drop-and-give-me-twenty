@@ -14,18 +14,18 @@ export async function getActivitiesById(requestId) {
 
 // add new activity to the activities array
 export async function createNewActivity(newActivity) {
-    if(!newActivity||newActivity.activity_duration === ""||newActivity.activity_type === "")
-    {
-        throw new Error("You have missed one of the input fields")
+    if (!newActivity || newActivity.activity_duration === "" || newActivity.activity_type === "") {
+        throw new Error("You have missed one of the input fields");
     }
-    else{
-    const activity = {
-        id : crypto.randomUUID(),
-        activity_submitted : Date.now(),
-        ...newActivity
+    else {
+        const activity = {
+            id: crypto.randomUUID(),
+            activity_submitted: Date.now(),
+            ...newActivity
 
+        }
+        activities.push(activity);
+        console.log(activities);
+        return activity;
     }
-    activities.push(activity);
-    console.log(activities);
-    return activity;}
 };
