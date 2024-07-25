@@ -68,7 +68,8 @@ app.post('/activities', async function (req, res) {
             "payload": newActivity
         });
     }
-    catch {
+    catch (e) {
+        console.error(e)
         res.status(300).json({
             "success": false,
             "payload": null
