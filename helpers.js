@@ -20,7 +20,7 @@ export async function createNewActivity(newActivity) {
     else {
         const activity = {
             id: crypto.randomUUID(),
-            activity_submitted: Date.now(),
+            activity_submitted: JSON.stringify(Date.now()),
             ...newActivity
 
         }
