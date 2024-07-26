@@ -10,9 +10,9 @@ export async function getActivitiesById(requestId) {
         return userActivities;
     }
     else {
-    throw new Error(`No activity with ${requestId} found.`);
+        throw new Error(`No activity with ${requestId} found.`);
     }
-    
+
 }
 
 // add new activity to the activities array
@@ -53,18 +53,17 @@ export async function updateActivity(requestId, updatedActivity) {
 }
 
 //Create helper function to delete activities
-//Match given id to an existing id
-//if no match, throw error
-// if there is a match, store match in a variable
-// .slice the deleted input
-//return deleted element
-
-export async function deleteActivity(requestID, deleteActivityById) {
-    const index = activities.findIndex(({id}) => id === requestID);
-    if (index === -1){
+export async function deleteActivity(requestID) {
+    //Match given id to an existing id
+    const index = activities.findIndex(({ id }) => id === requestID);
+    //if no match, throw error
+    if (index === -1) {
         throw new Error(`There is no Id that matches ${requestId}`);
     }
-    const deletedActivity = activities[index]
-        activities.splice(index, 1);
-        return deletedActivity;
+    // if there is a match, store match in a variable
+    const deletedActivity = activities[index];
+    // remove the given activity
+    activities.splice(index, 1);
+    //return deleted element
+    return deletedActivity;
 }
