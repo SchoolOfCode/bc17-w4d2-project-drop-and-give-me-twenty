@@ -33,9 +33,20 @@ export async function createNewActivity(newActivity) {
 //Helper function to updateActivity
 
 export async function updateActivity(requestId, updatedActivity) {
-// Match given id to an existing id
-// if no match, throw error
+    // Match given id to an existing id
+    const index  = activities.findIndex(({ id }) => id === requestId);
+    // if no match, throw error
+if(index === -1){
+throw new error (`There is no Id that match ${requestId}`);}
 // if there is a match update activity with new fields
+activities[index]= {
+    activity_submitted: Date.now(),
+    ...activities[index],
+    ...updatedActivity
+}
 // return updated activity
+return activities[index]
+
+
 
 }
