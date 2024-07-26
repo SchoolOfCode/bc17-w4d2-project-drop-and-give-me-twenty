@@ -29,3 +29,13 @@ export async function createNewActivity(newActivity) {
         return activity;
     }
 };
+
+//Helper function to updateActivity
+
+export async function updateActivity(requestId, updatedActivity) {
+// Match given id to an existing id
+// if no match, throw error
+// if there is a match update activity with new fields
+// return updated activity
+
+}
