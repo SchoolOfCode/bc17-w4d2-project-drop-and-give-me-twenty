@@ -9,7 +9,10 @@ export async function getActivitiesById(requestId) {
     if (userActivities) {
         return userActivities;
     }
+    else {
     throw new Error(`No activity with ${requestId} found.`);
+    }
+    
 }
 
 // add new activity to the activities array

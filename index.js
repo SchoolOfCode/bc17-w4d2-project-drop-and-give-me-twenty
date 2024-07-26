@@ -1,6 +1,6 @@
 import express from 'express';
 import helmet from 'helmet';
-import { getActivitiesById, createNewActivity, updateActivity } from "./helpers.js";
+import { getActivitiesById, createNewActivity, updateActivity, deleteActivity } from "./helpers.js";
 const app = express();
 const port = 3000
 
@@ -51,9 +51,9 @@ app.get('/activities/:id', async function (req, res) {
             "payload": ActiveID
         });
     } catch (e) {
-        res.status(500).json({
+        res.status(300).json({
             "success": false,
-            "payload": null
+            "payload": e
         });
     };
 });
@@ -96,6 +96,28 @@ app.put('/activities/:id', async function (req, res) {
         })
     }
 })
+
+//Delete handler function
+
+app.delete('/activities/:id', async function(req,res){
+    const id = req.params.id
+    try{
+        const deletedActivity = await deleteActivity(id);
+        res.status(200).json({
+            "sucess": true,
+            "payload": deletedActivity
+        });
+    } catch (e){
+        console.error(e)
+        res.status(300).json({
+            "success": false,
+            "payload": e
+        })
+    }
+
+})
+
+
 
 // open up listening on port 3000
 app.listen(port, function () {
