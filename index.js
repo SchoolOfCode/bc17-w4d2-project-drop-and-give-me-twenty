@@ -1,6 +1,6 @@
 import express from 'express';
 import helmet from 'helmet';
-import { getActivitiesById, createNewActivity } from "./helpers.js";
+import { getActivitiesById, createNewActivity, updateActivity } from "./helpers.js";
 const app = express();
 const port = 3000
 
@@ -25,8 +25,8 @@ app.get('/', function (req, res) {
 });
 
 // GET request handler to return all activities
-app.get('/activities', function (req, res) {
-    const allActivities = activities;
+app.get('/activities', async function (req, res) {
+    const allActivities = await activities;
     try {
         res.status(200).json({
             "success": true,
@@ -40,7 +40,7 @@ app.get('/activities', function (req, res) {
     };
 });
 
-//GEt request handler for User ID 
+//GEt request handler to get a specific activity
 
 app.get('/activities/:id', async function (req, res) {
     const id = req.params.id
@@ -58,6 +58,7 @@ app.get('/activities/:id', async function (req, res) {
     };
 });
 
+//Post request handler to add new activity
 app.post('/activities', async function (req, res) {
     const newActivity = await req.body.addActivity;
 
@@ -69,6 +70,25 @@ app.post('/activities', async function (req, res) {
         });
     }
     catch (e) {
+        console.error(e)
+        res.status(300).json({
+            "success": false,
+            "payload": e
+        })
+    }
+})
+
+// Put request handler to update an activity
+app.put('/activities/:id', async function (req, res) {
+    const id = req.params.id
+    const activityUpdate = await req.body;
+    try {
+        const updatedActivity = await updateActivity(id, activityUpdate);
+        res.status(200).json({
+            "success": true,
+            "payload": updatedActivity
+        });
+    } catch (e) {
         console.error(e)
         res.status(300).json({
             "success": false,
