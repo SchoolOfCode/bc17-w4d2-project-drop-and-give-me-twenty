@@ -3,6 +3,11 @@ import crypto from 'crypto';
 import { activities } from './activities.js';
 import { error } from 'console';
 
+// helper function to return all activities
+export async function getAllActivites() {
+    return activities;
+}
+
 // helper function to return activities by ID
 export async function getActivitiesById(requestId) {
     const userActivities = activities.find(({ id }) => id === requestId);

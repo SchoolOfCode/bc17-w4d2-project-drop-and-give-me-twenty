@@ -1,6 +1,6 @@
 import express from 'express';
 import helmet from 'helmet';
-import { getActivitiesById, createNewActivity, updateActivity, deleteActivity } from "./helpers.js";
+import { getAllActivites, getActivitiesById, createNewActivity, updateActivity, deleteActivity } from "./helpers.js";
 const app = express();
 const port = 3000
 
@@ -16,7 +16,7 @@ app.get('/', function (req, res) {
         res.status(200).send("Hello World");
         // log request to console
         console.log(req);
-    } catch {
+    } catch (e) {
         res.status(400).json({
             "success": false,
             "payload": null
@@ -26,13 +26,13 @@ app.get('/', function (req, res) {
 
 // GET request handler to return all activities
 app.get('/activities', async function (req, res) {
-    const allActivities = await activities;
+    const allActivities = await getAllActivites();
     try {
         res.status(200).json({
             "success": true,
             "payload": allActivities
         });
-    } catch {
+    } catch (e) {
         res.status(500).json({
             "success": false,
             "payload": null
@@ -99,15 +99,15 @@ app.put('/activities/:id', async function (req, res) {
 
 //Delete handler function
 
-app.delete('/activities/:id', async function(req,res){
+app.delete('/activities/:id', async function (req, res) {
     const id = req.params.id
-    try{
+    try {
         const deletedActivity = await deleteActivity(id);
         res.status(200).json({
             "sucess": true,
             "payload": deletedActivity
         });
-    } catch (e){
+    } catch (e) {
         console.error(e)
         res.status(300).json({
             "success": false,
