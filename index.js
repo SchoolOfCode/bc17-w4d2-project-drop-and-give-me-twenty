@@ -51,6 +51,7 @@ app.get('/activities/:id', async function (req, res) {
             "payload": ActiveID
         });
     } catch (e) {
+        console.error(e);
         res.status(300).json({
             "success": false,
             "payload": e
@@ -61,7 +62,6 @@ app.get('/activities/:id', async function (req, res) {
 //Post request handler to add new activity
 app.post('/activities', async function (req, res) {
     const newActivity = await req.body.addActivity;
-
     try {
         const activity = await createNewActivity(newActivity);
         res.status(201).json({
@@ -114,12 +114,11 @@ app.delete('/activities/:id', async function (req, res) {
             "payload": e
         })
     }
-
 })
 
 
 
 // open up listening on port 3000
 app.listen(port, function () {
-    console.log(`I am on Port ${port}`);
+    console.log(`I am ALIVE on Port ${port}`);
 });

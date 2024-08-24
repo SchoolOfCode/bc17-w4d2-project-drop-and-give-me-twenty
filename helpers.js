@@ -10,14 +10,13 @@ export async function getAllActivites() {
 
 // helper function to return activities by ID
 export async function getActivitiesById(requestId) {
-    const userActivities = activities.find(({ id }) => id === requestId);
-    if (userActivities) {
-        return userActivities;
-    }
-    else {
+    const userActivity = activities.find(({ id }) => id === requestId);
+    if (!userActivity) {
         throw new Error(`No activity with ${requestId} found.`);
     }
-
+    else {
+        return userActivity;
+    }
 }
 
 // add new activity to the activities array
